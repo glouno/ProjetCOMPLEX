@@ -27,3 +27,14 @@ Now, the nodes in the left subtree of our root all need to have smaller keys, so
 QED
 
 # sub-point b
+Let's prove the generalized version directly.
+
+Consider a list of nodes (represented as key-priority pairs). We want to show that inserting the nodes (using the insertion method of a binary tree) in order of increasing priority gives the same tree as the Cartesian Tree of the list (as built by our algorithm for example).
+
+We know that our insertion builds a Binary Search Tree (since we are using BST insertion). If we prove that inserting in increasing also builds a Queue, that is we are actually building a Cartesian Tree, since we know that Cartesian Trees are unique, we can conclude that we are building the same tree! So let's show we are also building a Queue.
+
+Consider we have inserted node with priority k. Since we are doing BST-insertion, we have inserted it is a leaf, that is it has no children for the moment. Since we have already inserted all nodes with priority lower than k, when we insert its children, they will have higher priority => node with priority k has priority lower than its children.
+
+This argument works for any node, so we have built a Queue, so we can conclude by the reasoning above.
+
+QED
