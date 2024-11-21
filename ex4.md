@@ -11,13 +11,13 @@ Thus, we can only consider the subtree with root the node we are tring to suppre
 
 The base case of our induction is a tree of height 1. We show the 3 cases in the figure below.
 
-(insert figure here)
+![Base case](./figures/base_case.jpg)
 
 Let's call the node are trying to suppress S and the subtree that has S as root TREE(S).
 
 Now, let's look at our induction step. We consider the case where S has both left and right children; the other 2 cases are similar. After a first rotation (in our case to the right), TREE(S) has the same height. We have reduced the number of nodes in one of its children (in the figure below its left child) and kept the other one constant, so since both children have a finite number of nodes we will at some point rotate S in the other direction (in the exampleto the left), after which the height of TREE(S) will decrease by 1. So we can apply our induction hypothesis and we are done.
 
-(insert figure here)
+![Induction step](./figures/induction_step.jpg)
 
 # sub-point b
 Similarly to the insertion algorithm, if S is at height $h$, since rotations have a constant cost, the complexity of our algorithm is O(h).
