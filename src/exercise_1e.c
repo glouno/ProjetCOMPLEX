@@ -31,10 +31,11 @@ int main() {
 
     add_right_child(F, G);
 
-    print_tree(ct->root, 0);
+    print_tree(ct->root, 0, 'S');
 
     // for good practices sake, let's free the memory
-    free_tree(ct);
+    free_tree(ct->root);
+    free(ct);
 
     return 0;
 }

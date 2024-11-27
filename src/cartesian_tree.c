@@ -73,7 +73,9 @@ void add_left_child(Node* parent, Node* child) {
     if (parent != NULL) {
         parent->left = child;
     }
-    printf("Error: parent node is null.\n");
+    else {
+        printf("Error: parent node is null.\n");
+    }
     return;
 }
 
@@ -81,7 +83,9 @@ void add_right_child(Node* parent, Node* child) {
     if (parent != NULL) {
         parent->right = child;
     }
-    printf("Error: parent node is null.\n");
+    else {
+        printf("Error: parent node is null.\n");
+    }
     return;
 }
 
@@ -94,7 +98,7 @@ void print_tree(Node* root, int depth, char dir) {
     for (int i = 0; i < depth; i++) {
         printf("\t");
     }
-    printf("%s, K: %s, P: %d", dir, root->key, root->priority);
-    print_tree(root->left, depth + 1, "L");
-    print_tree(root->right, depth + 1, "R");
+    printf("%c, K: %c, P: %f\n", dir, root->key, root->priority);
+    print_tree(root->left, depth + 1, 'L');
+    print_tree(root->right, depth + 1, 'R');
 }

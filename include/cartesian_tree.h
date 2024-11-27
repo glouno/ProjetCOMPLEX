@@ -24,6 +24,6 @@ Node* get_left_child(Node* node);
 Node* get_right_child(Node* node);
 void add_left_child(Node* parent, Node* child);
 void add_right_child(Node* parent, Node* child);
-void print_tree(Node* root, int depth);
+void print_tree(Node* root, int depth, char dir);
 
 #endif
