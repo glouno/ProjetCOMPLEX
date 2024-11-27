@@ -4,13 +4,12 @@
 #include <stdlib.h>
 #include "../include/cartesian_tree.h"
 
-// safe to free NULL pointers, so we only consider creation functions
-// functions for managing the creation of nodes
+// functions for managing the creation and deletion of nodes
 Node* create_node(char key, int priority) {
     Node* new_node = (Node*)malloc(sizeof(Node));
 
     if (new_node == NULL) {
-        printf("Error in allocating memory for a new node.");
+        printf("Error in allocating memory for a new node.\n");
         return NULL;
     }
 
@@ -27,7 +26,7 @@ Tree* create_empty_tree() {
     Tree* tree = (Tree*)malloc(sizeof(Tree));
 
     if (tree == NULL) {
-        printf("Error in allocating memory for a new tree.");
+        printf("Error in allocating memory for a new tree.\n");
         return NULL;
     }
 
@@ -41,7 +40,7 @@ void free_tree(Node* root) {
 
     free_tree(root->left);
     free_tree(root->right);
-    free_tree(root);
+    free(root);
 }
 
 void delete_tree(Tree* tree) {
@@ -74,6 +73,7 @@ void add_left_child(Node* parent, Node* child) {
     if (parent != NULL) {
         parent->left = child;
     }
+    printf("Error: parent node is null.\n");
     return;
 }
 
@@ -81,5 +81,20 @@ void add_right_child(Node* parent, Node* child) {
     if (parent != NULL) {
         parent->right = child;
     }
+    printf("Error: parent node is null.\n");
     return;
+}
+
+void print_tree(Node* root, int depth, char dir) {
+    if (root == NULL) {
+        return;
+    }
+
+    // print depth number of tabs
+    for (int i = 0; i < depth; i++) {
+        printf("\t");
+    }
+    printf("%s, K: %s, P: %d", dir, root->key, root->priority);
+    print_tree(root->left, depth + 1, "L");
+    print_tree(root->right, depth + 1, "R");
 }
