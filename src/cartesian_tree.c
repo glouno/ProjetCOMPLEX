@@ -2,19 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-// node structure
-typedef struct Node {
-    char key;
-    double priority;
-    struct Node* left;
-    struct Node* right;
-} Node;
-
-// tree structure
-typedef struct Tree {
-    Node* root;
-} Tree;
+#include "../include/cartesian_tree.h"
 
 // safe to free NULL pointers, so we only consider creation functions
 // functions for managing the creation of nodes
