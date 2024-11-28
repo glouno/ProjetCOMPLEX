@@ -98,7 +98,7 @@ void print_tree(Node* root, int depth, char dir) {
     for (int i = 0; i < depth; i++) {
         printf("\t");
     }
-    printf("%c, K: %c, P: %f\n", dir, root->key, root->priority);
+    printf("%c, K: %c, P: %.0f\n", dir, root->key, root->priority);
     print_tree(root->left, depth + 1, 'L');
     print_tree(root->right, depth + 1, 'R');
 }
