@@ -20,7 +20,7 @@ int main() {
     insert_tree(ct, 'J', 12);
 
     // Print the resulting tree
-    printf("Cartesian Tree after inserting nodes:\n");
+    printf("Initial Cartesian Tree after inserting nodes:\n");
     print_tree(ct->root, 0, 'S');
 
     // Search for a specific node (with depth)
@@ -29,6 +29,26 @@ int main() {
     Node* found_node = search_tree_withDepth(ct->root, key, &depth);
     if (found_node != NULL) {
         printf("Found node: K: %c, P: %.0f, at depth: %d.\n", found_node->key, found_node->priority, depth);
+    } else {
+        printf("Key not found in the tree. Closest depth: %d.\n", depth);
+    }
+
+
+    // Delete nodes one by one as per Exercise 4.d
+    printf("\nDeleting nodes in sequence:\n");
+
+    char keys_to_delete[] = {'A', 'J', 'H'};
+    for (int i = 0; i < 3; i++) {
+        printf("\nDeleting node with key '%c'...\n", keys_to_delete[i]);
+        delete_tree_node(ct, keys_to_delete[i]);
+        printf("Tree after deletion:\n");
+        print_tree(ct->root, 0, 'S');
+    }
+
+    // Search for a specific node after deletion
+    Node* found_node2 = search_tree_withDepth(ct->root, key, &depth);
+    if (found_node2 != NULL) {
+        printf("Found node: K: %c, P: %.0f, at depth: %d.\n", found_node2->key, found_node2->priority, depth);
     } else {
         printf("Key not found in the tree. Closest depth: %d.\n", depth);
     }
