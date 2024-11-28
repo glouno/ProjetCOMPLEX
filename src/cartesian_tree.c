@@ -89,6 +89,22 @@ void add_right_child(Node* parent, Node* child) {
     return;
 }
 
+
+// Special function to print the tree structure
+void print_tree(Node* root, int depth, char dir) {
+    if (root == NULL) {
+        return;
+    }
+
+    // print depth number of tabs
+    for (int i = 0; i < depth; i++) {
+        printf("\t");
+    }
+    printf("%c, K: %c, P: %.0f\n", dir, root->key, root->priority);
+    print_tree(root->left, depth + 1, 'L');
+    print_tree(root->right, depth + 1, 'R');
+}
+
 // additional utility functions
 Node* search_tree(Node* root, char key) {   // EX2 Search tree
     if (root == NULL) {
@@ -104,18 +120,20 @@ Node* search_tree(Node* root, char key) {   // EX2 Search tree
     }
 }
 
+Node* search_tree_withDepth(Node* root, char key, int* depth) {   // EX2 Search tree with depth
+    *depth = 0; // Initialize depth at the root
+    while (root != NULL) {
+        if (key == root->key) {
+            return root; // Key found
+        }
+        (*depth)++; // Increment depth as we move down the tree
 
-// Special function to print the tree structure
-void print_tree(Node* root, int depth, char dir) {
-    if (root == NULL) {
-        return;
+        if (key < root->key) {
+            root = root->left; // Move to the left subtree
+        } else {
+            root = root->right; // Move to the right subtree
+        }
     }
 
-    // print depth number of tabs
-    for (int i = 0; i < depth; i++) {
-        printf("\t");
-    }
-    printf("%c, K: %c, P: %.0f\n", dir, root->key, root->priority);
-    print_tree(root->left, depth + 1, 'L');
-    print_tree(root->right, depth + 1, 'R');
+    return NULL; // Key not found
 }
