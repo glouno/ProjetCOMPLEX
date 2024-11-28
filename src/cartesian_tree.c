@@ -201,3 +201,137 @@ void insert_tree(Tree* tree, char key, int priority) {
     }
     tree->root = insert_node(tree->root, key, priority);
 }
+
+// EX4 Deletion
+Node* get_lowest_priority_child(Node* node) {
+    if (node->left == NULL) {
+        return node->right;
+    }
+    if (node->right == NULL) {
+        return node->left;
+    }
+    return (node->left->priority < node->right->priority) ? node->left : node->right;
+}
+
+// Node* rotate_to_leaf(Node* root, Node* target) {
+//     if (root == NULL || target == NULL) {
+//         return root;
+//     }
+
+//     while (target->left != NULL || target->right != NULL) {
+//         Node* child = get_lowest_priority_child(target);
+//         if (target->left == child) {
+//             root = rotateRight(root);
+//         } else if (target->right == child) {
+//             root = rotateLeft(root);
+//         }
+//     }
+
+//     return root;
+// }
+
+// Node* rotate_to_leaf(Node* root, Node* target) {
+//     if (root == NULL || target == NULL) {
+//         return root;
+//     }
+
+//     while (target->left != NULL || target->right != NULL) {
+//         Node* child = get_lowest_priority_child(target);
+
+//         if (target->left == child) {
+//             if (root != target) {
+//                 root = rotateRight(root);  // Update root if target is the root
+//             } else {
+//                 target = rotateRight(target);
+//             }
+//         } else if (target->right == child) {
+//             if (root != target) {
+//                 root = rotateLeft(root);  // Update root if target is the root
+//             } else {
+//                 target = rotateLeft(target);
+//             }
+//         }
+//     }
+
+//     return root;
+// }
+
+Node* rotate_to_leaf(Node* root, Node* target) {
+    if (root == NULL || target == NULL) {
+        return root;
+    }
+
+    Node** parent_link = NULL;  // Track the parent's link to the current target
+    Node* parent = NULL;        // Track the parent of the target
+
+    // Find the parent and parent's link for the target
+    if (root != target) {
+        parent = root;
+        while (parent != NULL) {
+            if (parent->left == target) {
+                parent_link = &(parent->left);
+                break;
+            } else if (parent->right == target) {
+                parent_link = &(parent->right);
+                break;
+            }
+            parent = (target->key < parent->key) ? parent->left : parent->right;
+        }
+    }
+
+    // Perform rotations until the target becomes a leaf
+    while (target->left != NULL || target->right != NULL) {
+        Node* child = get_lowest_priority_child(target);
+
+        if (child == target->left) {
+            if (root == target) {
+                root = rotateRight(root);  // Update root if target is the root
+            } else {
+                *parent_link = rotateRight(target);  // Update parent's link
+            }
+        } else if (child == target->right) {
+            if (root == target) {
+                root = rotateLeft(root);  // Update root if target is the root
+            } else {
+                *parent_link = rotateLeft(target);  // Update parent's link
+            }
+        }
+
+        // Update the parent's link to reflect the new target position
+        if (root != target) {
+            parent = *parent_link;  // Parent now points to the rotated subtree
+        }
+    }
+
+    return root;
+}
+
+Node* delete_node(Node* root, char key) {
+    if (root == NULL) {
+        return NULL;
+    }
+
+    // Search for the node to delete
+    if (key < root->key) {
+        root->left = delete_node(root->left, key);
+    } else if (key > root->key) {
+        root->right = delete_node(root->right, key);
+    } else {
+        // Node found; rotate it to a leaf
+        root = rotate_to_leaf(root, root);
+
+        // Now remove the node
+        free(root);
+        return NULL;
+    }
+
+    return root;
+}
+
+void delete_tree_node(Tree* tree, char key) {
+    if (tree == NULL || tree->root == NULL) {
+        printf("Error: Tree is empty or NULL.\n");
+        return;
+    }
+    tree->root = delete_node(tree->root, key);
+}
