@@ -89,6 +89,23 @@ void add_right_child(Node* parent, Node* child) {
     return;
 }
 
+// additional utility functions
+Node* search_tree(Node* root, char key) {   // EX2 Search tree
+    if (root == NULL) {
+        return NULL; // Key not found
+    }
+
+    if (root->key == key) {
+        return root; // Key found
+    } else if (key < root->key) {
+        return search_tree(root->left, key); // Search in the left subtree
+    } else {
+        return search_tree(root->right, key); // Search in the right subtree
+    }
+}
+
+
+// Special function to print the tree structure
 void print_tree(Node* root, int depth, char dir) {
     if (root == NULL) {
         return;
