@@ -27,5 +27,8 @@ void add_right_child(Node* parent, Node* child);
 void print_tree(Node* root, int depth, char dir);
 Node* search_tree(Node* root, char key);    // EX2 Search tree
 Node* search_tree_withDepth(Node* root, char key, int* depth);
+// EX3
+Node* insert_node(Node* root, char key, int priority);
+void insert_tree(Tree* tree, char key, int priority);
 
 #endif

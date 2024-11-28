@@ -137,3 +137,67 @@ Node* search_tree_withDepth(Node* root, char key, int* depth) {   // EX2 Search 
 
     return NULL; // Key not found
 }
+
+// EX3 Insertion & self-balancing
+Node* rotateRight(Node* y) {
+    printf("Performing right rotation on node with key '%c'\n", y->key);
+    Node* x = y->left;
+    Node* T = x->right;
+
+    // Perform rotation
+    x->right = y;
+    y->left = T;
+
+    return x;  // x becomes the new root of the rotated subtree
+}
+
+Node* rotateLeft(Node* x) {
+    printf("Performing left rotation on node with key '%c'\n", x->key);
+    Node* y = x->right;
+    Node* T = y->left;
+
+    // Perform rotation
+    y->left = x;
+    x->right = T;
+
+    return y;  // y becomes the new root of the rotated subtree
+}
+
+Node* insert_node(Node* root, char key, int priority) {
+    if (root == NULL) {
+        // Base case: Create a new node if root is null
+        return create_node(key, priority);
+    }
+
+    // Perform standard BST insertion
+    if (key < root->key) {
+        // Insert in the left subtree
+        root->left = insert_node(root->left, key, priority);
+
+        // Restore heap property if violated
+        if (root->left != NULL && root->left->priority < root->priority) {
+            root = rotateRight(root);
+        }
+    } else if (key > root->key) {
+        // Insert in the right subtree
+        root->right = insert_node(root->right, key, priority);
+
+        // Restore heap property if violated
+        if (root->right != NULL && root->right->priority < root->priority) {
+            root = rotateLeft(root);
+        }
+    } else {
+        // Duplicate key case
+        printf("Error: Duplicate key '%c' is not allowed in Cartesian Tree.\n", key);
+    }
+
+    return root; // Return the updated root
+}
+
+void insert_tree(Tree* tree, char key, int priority) {
+    if (tree == NULL) {
+        printf("Error: Tree is NULL.\n");
+        return;
+    }
+    tree->root = insert_node(tree->root, key, priority);
+}

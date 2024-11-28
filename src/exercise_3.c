@@ -6,34 +6,21 @@
 int main() {
     // create nodes and empty tree
     Tree* ct = create_empty_tree();
-    Node* A = create_node('A', 5);
-    Node* B = create_node('B', 3);
-    Node* C = create_node('C', 8);
-    Node* D = create_node('D', 2);
-    Node* E = create_node('E', 6);
-    Node* F = create_node('F', 7);
-    Node* G = create_node('G', 9);
-    Node* H = create_node('H', 1);
-    Node* I = create_node('I', 10);
-    Node* J = create_node('J', 12);
 
-    // add nodes to tree
-    printf("Building the tree manually...\n");
-    ct->root = H;
-    add_left_child(H, D);
-    add_right_child(H, I);
+    // Insert nodes (Example from 3.d, sequence 1)
+    insert_tree(ct, 'A', 5);
+    insert_tree(ct, 'B', 3);
+    insert_tree(ct, 'C', 8);
+    insert_tree(ct, 'D', 2);
+    insert_tree(ct, 'E', 6);
+    insert_tree(ct, 'F', 7);
+    insert_tree(ct, 'G', 9);
+    insert_tree(ct, 'H', 1);
+    insert_tree(ct, 'I', 10);
+    insert_tree(ct, 'J', 12);
 
-    add_left_child(D, B);
-    add_right_child(D, E);
-    add_right_child(I, J);
-
-    add_left_child(B, A);
-    add_right_child(B, C);
-    add_right_child(E, F);
-
-    add_right_child(F, G);
-
-    // Visualize tree structure
+    // Print the resulting tree
+    printf("Cartesian Tree after inserting nodes:\n");
     print_tree(ct->root, 0, 'S');
 
     // Search for a specific node (with depth)
