@@ -7,16 +7,16 @@ int main() {
     // create tree
     Tree* ct = create_empty_tree();
 
-    insert_tree(ct, 'A', 5);
-    insert_tree(ct, 'B', 3);
-    insert_tree(ct, 'C', 8);
-    insert_tree(ct, 'D', 2);
-    insert_tree(ct, 'E', 6);
-    insert_tree(ct, 'F', 7);
-    insert_tree(ct, 'G', 9);
-    insert_tree(ct, 'H', 1);
-    insert_tree(ct, 'I', 10);
-    insert_tree(ct, 'J', 12);
+    insert_tree(ct, 'A', 5, NULL);
+    insert_tree(ct, 'B', 3, NULL);
+    insert_tree(ct, 'C', 8, NULL);
+    insert_tree(ct, 'D', 2, NULL);
+    insert_tree(ct, 'E', 6, NULL);
+    insert_tree(ct, 'F', 7, NULL);
+    insert_tree(ct, 'G', 9, NULL);
+    insert_tree(ct, 'H', 1, NULL);
+    insert_tree(ct, 'I', 10, NULL);
+    insert_tree(ct, 'J', 12, NULL);
 
     // Delete nodes one by one as per Exercise 4.d
     printf("\nDeleting nodes in sequence:\n");

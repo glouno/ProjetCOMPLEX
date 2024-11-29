@@ -90,7 +90,7 @@ void rotate_left(Tree* tree, Node* pred, Node* curr) {
     }
 }
 
-void insert_tree(Tree* tree, char key, double priority) {
+void insert_tree(Tree* tree, char key, double priority, int* depth) {
     // first we need to insert as we would in a BST
     Node* pred = NULL;
     Node* curr = tree->root;
@@ -99,10 +99,12 @@ void insert_tree(Tree* tree, char key, double priority) {
         if (key < curr->key) {
             pred = curr;
             curr = curr->left;
+            if (depth != NULL) {(*depth)++;}
         }
         else if (key > curr->key) {
             pred = curr;
             curr = curr->right;
+            if (depth != NULL) {(*depth)++;}
         }
         else {
             printf("Error: tried to insert a key that already exists in the tree.\n");
@@ -195,4 +197,8 @@ void shuffle(char* keys, int size) {
         keys[i] = keys[j];
         keys[j] = temp;
     }
+}
+
+int compare_chars(const void *a, const void *b) {
+    return (*(char *)a - *(char *)b);
 }
