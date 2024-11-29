@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "../include/cartesian_tree.h"
 #include "../include/tree_operations.h"
 
@@ -164,4 +165,34 @@ void delete_node(Tree* tree, char key) {
     }
 
     free(node);
+}
+
+// EX5 functions
+void initialize_random_generator() {
+    srand(time(NULL));
+}
+
+int height_tree(Node* root) {
+    if (root == NULL) {
+        return 0;
+    }
+
+    int left_height = height_tree(root->left);
+    int right_height = height_tree(root->right);
+
+    return (left_height > right_height ? left_height : right_height) + 1;
+}
+
+// algorithm to uniformly generate a permutation of the key list
+// can then select first 10 elements to have uniformly selected 10 elements
+// algorithm given by CHATGPT
+void shuffle(char* keys, int size) {
+    for (int i = size - 1; i > 0; i--) {
+        // generate a random index
+        int j = rand() % (i + 1);
+
+        char temp = keys[i];
+        keys[i] = keys[j];
+        keys[j] = temp;
+    }
 }

@@ -6,18 +6,20 @@ OBJ_1 = build/ct.o build/ex1.o
 OBJ_2 = build/ct.o build/top.o build/ex2.o
 OBJ_3 = build/ct.o build/top.o build/ex3.o
 OBJ_4 = build/ct.o build/top.o build/ex4.o
+OBJ_5 = build/ct.o build/top.o build/ex5.o
 
 # target executables
 TARGET_1 = bin/ex1
 TARGET_2 = bin/ex2
 TARGET_3 = bin/ex3
 TARGET_4 = bin/ex4
+TARGET_5 = bin/ex5
 
 # rules
-all: setup TARGET_1 TARGET_2 TARGET_3 TARGET_4
+all: setup TARGET_1 TARGET_2 TARGET_3 TARGET_4 TARGET_5
 
 setup:
-	mkdir -p bin build
+	mkdir -p bin build data
 
 # rules for implementation files
 build/ct.o: src/cartesian_tree.c include/cartesian_tree.h
@@ -53,6 +55,13 @@ $(TARGET_4): $(OBJ_4)
 
 build/ex4.o: src/exercise_4.c include/cartesian_tree.h include/tree_operations.h
 	gcc $(CFLAGS) -c src/exercise_4.c -o build/ex4.o
+
+# rules for exercise 5
+$(TARGET_5): $(OBJ_5)
+	gcc $(OBJ_5) -o $(TARGET_5)
+
+build/ex5.o: src/exercise_5.c include/cartesian_tree.h include/tree_operations.h
+	gcc $(CFLAGS) -c src/exercise_5.c -o build/ex5.o
 
 clean:
 	rm -rf bin build

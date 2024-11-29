@@ -15,4 +15,9 @@ void insert_tree(Tree* tree, char key, double priority);
 // EX4 delete function
 void delete_node(Tree* tree, char key);
 
+// EX5
+void initialize_random_generator();
+int height_tree(Node* root);
+void shuffle(char* keys, int size);
+
 #endif
