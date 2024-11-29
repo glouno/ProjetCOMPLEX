@@ -5,16 +5,16 @@
 int main() {
     // create nodes and empty tree
     Tree* ct = create_empty_tree();
-    Node* A = create_node('A', 5);
-    Node* B = create_node('B', 3);
-    Node* C = create_node('C', 8);
-    Node* D = create_node('D', 2);
-    Node* E = create_node('E', 6);
-    Node* F = create_node('F', 7);
-    Node* G = create_node('G', 9);
-    Node* H = create_node('H', 1);
-    Node* I = create_node('I', 10);
-    Node* J = create_node('J', 12);
+    Node* A = create_node(0, 5);
+    Node* B = create_node(1, 3);
+    Node* C = create_node(2, 8);
+    Node* D = create_node(3, 2);
+    Node* E = create_node(4, 6);
+    Node* F = create_node(5, 7);
+    Node* G = create_node(6, 9);
+    Node* H = create_node(7, 1);
+    Node* I = create_node(8, 10);
+    Node* J = create_node(9, 12);
 
     // add nodes to tree
     ct->root = H;

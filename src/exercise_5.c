@@ -4,7 +4,6 @@
 #include "../include/cartesian_tree.h"
 #include "../include/tree_operations.h"
 
-// we will be working with the ASCII range 32-126 for tree keys
 // we write our numerical results to a file in order to plot with Python later
 
 // one pair of equal priority nodes affects the height of a tree by at most 1
@@ -13,28 +12,28 @@
 
 int main() {
     // define usable nodes keys
-    char keys[75];
-    for (int i = 0; i < 75; i++) {
-        keys[i] = 32 + i;
+    int keys[15000];
+    for (int i = 0; i < 15000; i++) {
+        keys[i] = i;
     }
 
     initialize_random_generator();
 
     // evaluate balance of Cartesian Trees
-    // for number of nodes from 1-20, we construct 3 trees and calculate their height
+    // for number of nodes from 1-100, we construct 3 trees and calculate their height
     // since we are inserting the keys in order, we are studying at the same time the BST worst-case
     FILE *fp = fopen("data/height.csv", "w");
     if (fp == NULL) {
         printf("Error opening height file.\n");
     }
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 100; i++) {
         for (int j = 0; j < 3; j++) {
             Tree* ct = create_empty_tree();
 
             for (int k = 0; k < i; k++) {
                 double priority = (double)rand();
-                insert_tree(ct, keys[k], priority, NULL);
+                insert_tree(ct, k, priority, NULL);
             }
             int height = height_tree(ct->root);
             fprintf(fp, "%d,%d\n", i+1, height);
@@ -45,27 +44,27 @@ int main() {
     }
 
     // evaluate search time
-    // construct 5 random trees of height 50
-    // randomly select 25 nodes and search them
+    // construct 3 random trees of height 5000
+    // randomly select 1000 nodes and search them
     // we save their depth and search time
     fp = fopen("data/search.csv", "w");
     if (fp == NULL) {
         printf("Error opening search file.\n");
     }
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
         Tree* ct = create_empty_tree();
         clock_t start, end;
         double duration;
         int depth;
 
-        for (int k = 0; k < 50; k++) {
+        for (int k = 0; k < 5000; k++) {
             double priority = (double)rand();
-            insert_tree(ct, keys[k], priority, NULL);
+            insert_tree(ct, k, priority, NULL);
         }
 
-        shuffle(keys, 50);
-        for (int k = 0; k < 25; k++) {
+        shuffle(keys, 5000);
+        for (int k = 0; k < 1000; k++) {
             depth = 0;
 
             start = clock();
@@ -75,7 +74,7 @@ int main() {
 
             fprintf(fp, "%d,%f\n", depth, duration);
         }
-        qsort(keys, 50, sizeof(char), compare_chars);
+        qsort(keys, 5000, sizeof(int), compare_ints);
 
         free_tree(ct->root);
         free(ct);
@@ -83,7 +82,7 @@ int main() {
 
     // conclude that we need to work with much bigger size to see meaningful numbers
     // evaluate search and insert time
-    // for 5 random trees of size 50, record duration of 25 random new nodes
+    // for 3 random trees of size 10000, record duration of 5000 random new nodes
     FILE* fp_i = fopen("data/insert.csv", "w");
     if (fp_i == NULL) {
         printf("Error opening insert file.\n");
@@ -93,21 +92,21 @@ int main() {
         printf("Error opening delete file.\n");
     }
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
         Tree* ct = create_empty_tree();
         clock_t start, end;
         double duration;
 
-        for (int k = 0; k < 50; k++) {
+        for (int k = 0; k < 10000; k++) {
             double priority = (double)rand();
-            insert_tree(ct, keys[k], priority, NULL);
+            insert_tree(ct, k, priority, NULL);
         }
 
-        shuffle(keys + 50, 25);
-        for (int k = 0; k < 25; k++) {
+        shuffle(keys + 10000, 5000);
+        for (int k = 0; k < 5000; k++) {
             double priority = (double)rand();
             int depth = 0;
-            int key = keys[50 + k];
+            int key = keys[10000 + k];
 
             // first insert node
             start = clock();
@@ -127,7 +126,7 @@ int main() {
             search_tree_with_depth(ct->root, key, &depth);
             fprintf(fp_d, "%d,%f\n", depth, duration);
         }
-        qsort(keys + 50, 25, sizeof(char), compare_chars);
+        qsort(keys + 10000, 5000, sizeof(int), compare_ints);
 
         free_tree(ct->root);
         free(ct);

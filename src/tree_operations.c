@@ -7,7 +7,7 @@
 #include "../include/tree_operations.h"
 
 // search functions
-Node* search_tree(Node* root, char key) {
+Node* search_tree(Node* root, int key) {
     // key not found
     if (root == NULL) {
         return NULL;
@@ -25,7 +25,7 @@ Node* search_tree(Node* root, char key) {
     }
 }
 
-Node* search_tree_with_depth(Node* root, char key, int* depth) {
+Node* search_tree_with_depth(Node* root, int key, int* depth) {
     // key not found
     if (root == NULL) {
         return NULL;
@@ -90,7 +90,7 @@ void rotate_left(Tree* tree, Node* pred, Node* curr) {
     }
 }
 
-void insert_tree(Tree* tree, char key, double priority, int* depth) {
+void insert_tree(Tree* tree, int key, double priority, int* depth) {
     // first we need to insert as we would in a BST
     Node* pred = NULL;
     Node* curr = tree->root;
@@ -138,7 +138,7 @@ void insert_tree(Tree* tree, char key, double priority, int* depth) {
 }
 
 // delete function
-void delete_node(Tree* tree, char key) {
+void delete_node(Tree* tree, int key) {
     // find node with given key
     Node* node = search_tree(tree->root, key);
 
@@ -188,17 +188,17 @@ int height_tree(Node* root) {
 // algorithm to uniformly generate a permutation of the key list
 // can then select first 10 elements to have uniformly selected 10 elements
 // algorithm given by CHATGPT
-void shuffle(char* keys, int size) {
+void shuffle(int* keys, int size) {
     for (int i = size - 1; i > 0; i--) {
         // generate a random index
         int j = rand() % (i + 1);
 
-        char temp = keys[i];
+        int temp = keys[i];
         keys[i] = keys[j];
         keys[j] = temp;
     }
 }
 
-int compare_chars(const void *a, const void *b) {
-    return (*(char *)a - *(char *)b);
+int compare_ints(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
 }

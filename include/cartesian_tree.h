@@ -3,7 +3,7 @@
 
 // node structure
 typedef struct Node {
-    char key;
+    int key;
     double priority;
     struct Node* left;
     struct Node* right;
@@ -16,7 +16,7 @@ typedef struct Tree {
 } Tree;
 
 // function prototypes
-Node* create_node(char key, int priority);
+Node* create_node(int key, int priority);
 Tree* create_empty_tree();
 void free_tree(Node* root);
 void delete_tree(Tree* tree);
