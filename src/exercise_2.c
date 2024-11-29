@@ -1,7 +1,7 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/cartesian_tree.h"
+#include "../include/tree_operations.h"
 
 int main() {
     // create nodes and empty tree
@@ -18,7 +18,6 @@ int main() {
     Node* J = create_node('J', 12);
 
     // add nodes to tree
-    printf("Building the tree manually...\n");
     ct->root = H;
     add_left_child(H, D);
     add_right_child(H, I);
@@ -33,31 +32,22 @@ int main() {
 
     add_right_child(F, G);
 
-    // Visualize tree structure
     print_tree(ct->root, 0, 'S');
 
-    // Search for a specific node
-    // Node* found_node = search_tree(ct->root, 'E');
-    // if (found_node != NULL) {
-    //     printf("Found node: K: %c, P: %.0f\n", found_node->key, found_node->priority);
-    // } else {
-    //     printf("Key not found in the tree.\n");
-    // }
-    // With depth version
+    // test correctness of search function
     char key = 'E';
-    int depth;
-    Node* found_node = search_tree_withDepth(ct->root, key, &depth);
+    int depth = 0;
+
+    Node* found_node = search_tree_with_depth(ct->root, key, &depth);
     if (found_node != NULL) {
         printf("Found node: K: %c, P: %.0f, at depth: %d.\n", found_node->key, found_node->priority, depth);
     } else {
         printf("Key not found in the tree. Closest depth: %d.\n", depth);
     }
 
-    // for good practices sake, let's free the memory
-    printf("\nDeleting tree...\n");
+    // free memory
     free_tree(ct->root);
     free(ct);
 
-    printf("Program finished successfully.\n");
     return 0;
 }

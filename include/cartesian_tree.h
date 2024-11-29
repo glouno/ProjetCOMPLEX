@@ -25,8 +25,6 @@ Node* get_right_child(Node* node);
 void add_left_child(Node* parent, Node* child);
 void add_right_child(Node* parent, Node* child);
 void print_tree(Node* root, int depth, char dir);
-Node* search_tree(Node* root, char key);    // EX2 Search tree
-Node* search_tree_withDepth(Node* root, char key, int* depth);
 // EX3
 Node* rotateRight(Node* y);
 Node* rotateLeft(Node* x);

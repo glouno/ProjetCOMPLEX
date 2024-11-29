@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/cartesian_tree.h"
+#include "../include/tree_operations.h"
 
 int main() {
     // create nodes and empty tree
@@ -26,7 +27,7 @@ int main() {
     // Search for a specific node (with depth)
     char key = 'E';
     int depth;
-    Node* found_node = search_tree_withDepth(ct->root, key, &depth);
+    Node* found_node = search_tree_with_depth(ct->root, key, &depth);
     if (found_node != NULL) {
         printf("Found node: K: %c, P: %.0f, at depth: %d.\n", found_node->key, found_node->priority, depth);
     } else {
