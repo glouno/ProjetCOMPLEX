@@ -16,7 +16,7 @@ TARGET_4 = bin/ex4
 TARGET_5 = bin/ex5
 
 # rules
-all: setup TARGET_1 TARGET_2 TARGET_3 TARGET_4 TARGET_5
+all: setup $(TARGET_1) $(TARGET_2) $(TARGET_3) $(TARGET_4) $(TARGET_5)
 
 setup:
 	mkdir -p bin build data
