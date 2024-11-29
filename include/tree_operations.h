@@ -13,5 +13,6 @@ void rotate_left(Tree* tree, Node* pred, Node* curr);
 void insert_tree(Tree* tree, char key, double priority);
 
 // EX4 delete function
+void delete_node(Tree* tree, char key);
 
 #endif

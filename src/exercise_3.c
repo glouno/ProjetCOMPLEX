@@ -27,5 +27,43 @@ int main() {
     free_tree(ct->root);
     free(ct);
 
+    // sequence 2
+    ct = create_empty_tree();
+
+    insert_tree(ct, 'H', 1);
+    insert_tree(ct, 'G', 9);
+    insert_tree(ct, 'A', 5);
+    insert_tree(ct, 'B', 3);
+    insert_tree(ct, 'D', 2);
+    insert_tree(ct, 'F', 7);
+    insert_tree(ct, 'C', 8);
+    insert_tree(ct, 'J', 12);
+    insert_tree(ct, 'I', 10);
+    insert_tree(ct, 'E', 6);
+
+    print_tree(ct->root, 0, 'S');
+
+    free_tree(ct->root);
+    free(ct);
+
+    // sequence 3
+    ct = create_empty_tree();
+
+    insert_tree(ct, 'E', 6);
+    insert_tree(ct, 'H', 1);
+    insert_tree(ct, 'B', 3);
+    insert_tree(ct, 'D', 2);
+    insert_tree(ct, 'C', 8);
+    insert_tree(ct, 'F', 7);
+    insert_tree(ct, 'G', 9);
+    insert_tree(ct, 'J', 12);
+    insert_tree(ct, 'A', 5);
+    insert_tree(ct, 'I', 10);
+
+    print_tree(ct->root, 0, 'S');
+
+    free_tree(ct->root);
+    free(ct);
+
     return 0;
 }

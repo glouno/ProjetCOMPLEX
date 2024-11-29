@@ -133,3 +133,35 @@ void insert_tree(Tree* tree, char key, double priority) {
         }
     }
 }
+
+// delete function
+void delete_node(Tree* tree, char key) {
+    // find node with given key
+    Node* node = search_tree(tree->root, key);
+
+    // rotate node until both its children are leaves
+    while (node->left != NULL && node->right != NULL) {
+        if (node->left->priority < node->right->priority) {
+            rotate_right(tree, node, node->left);
+        }
+        else {
+            rotate_left(tree, node, node->right);
+        }
+    }
+
+    // can now delete the node
+    if (node->parent == NULL) {
+        tree->root = NULL;
+    }
+    else {
+        Node* pred = node->parent;
+        if (pred->key > node->key) {
+            pred->left = NULL;
+        }
+        else {
+            pred->right = NULL;
+        }
+    }
+
+    free(node);
+}
