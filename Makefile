@@ -4,13 +4,17 @@ CFLAGS = -Iinclude -Wall -Wextra -g
 # object files for each compilation target
 OBJ_1 = build/ct.o build/ex1.o
 OBJ_2 = build/ct.o build/top.o build/ex2.o
+OBJ_3 = build/ct.o build/top.o build/ex3.o
+OBJ_4 = build/ct.o build/top.o build/ex4.o
 
 # target executables
 TARGET_1 = bin/ex1
 TARGET_2 = bin/ex2
+TARGET_3 = bin/ex3
+TARGET_4 = bin/ex4
 
 # rules
-all: setup TARGET_1 TARGET_2
+all: setup TARGET_1 TARGET_2 TARGET_3 TARGET_4
 
 setup:
 	mkdir -p bin build

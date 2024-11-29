@@ -7,6 +7,7 @@ typedef struct Node {
     double priority;
     struct Node* left;
     struct Node* right;
+    struct Node* parent;
 } Node;
 
 // tree structure
@@ -25,16 +26,5 @@ Node* get_right_child(Node* node);
 void add_left_child(Node* parent, Node* child);
 void add_right_child(Node* parent, Node* child);
 void print_tree(Node* root, int depth, char dir);
-// EX3
-Node* rotateRight(Node* y);
-Node* rotateLeft(Node* x);
-Node* insert_node(Node* root, char key, int priority);
-void insert_tree(Tree* tree, char key, int priority);
-// EX4
-Node* delete_node(Node* root, char key);
-void delete_tree_node(Tree* tree, char key);
-Node* get_lowest_priority_child(Node* node);
-Node* rotate_to_leaf(Node* root, Node* target);
-
 
 #endif
